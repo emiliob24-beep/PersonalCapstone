@@ -8,17 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @StateObject private var appState = AppState()
 
-#Preview {
-    ContentView()
+    var body: some View {
+        TabView(selection: $appState.selectedTab) {
+            HistoryView()
+                .tabItem { Label("History", systemImage: "clock") }
+                .tag(AppTab.history)
+
+            ScheduleView()
+                .tabItem { Label("Schedule", systemImage: "calendar") }
+                .tag(AppTab.schedule)
+
+            GarageView()
+                .tabItem { Label("Garage", systemImage: "car.fill") }
+                .tag(AppTab.garage)
+
+            // Family Garage tab is temporarily hidden for the App Store
+            // submission — CloudKit sharing isn't reliably working yet
+            // (see the CKShare investigation). Re-add once that's fixed.
+
+            SettingsView()
+                .tabItem { Label("Settings", systemImage: "gearshape") }
+                .tag(AppTab.settings)
+        }
+        .tint(Color.appAccent)
+        .environmentObject(appState)
+        .task {
+            NotificationManager.shared.requestAuthorization()
+        }
+    }
 }

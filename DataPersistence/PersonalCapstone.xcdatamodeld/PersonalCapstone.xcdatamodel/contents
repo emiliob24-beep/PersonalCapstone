@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24902" systemVersion="25F80" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Document" representedClassName="Document" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fileData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="fileExtension" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="documents" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="Insurance" representedClassName="Insurance" syncable="YES" codeGenerationType="class">
+        <attribute name="documentData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="expirationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="policyNumber" optional="YES" attributeType="String"/>
+        <attribute name="provider" optional="YES" attributeType="String"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="insurance" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="Part" representedClassName="Part" syncable="YES" codeGenerationType="class">
+        <attribute name="cost" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="datePurchased" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="partNumber" optional="YES" attributeType="String"/>
+        <attribute name="purchasedFrom" optional="YES" attributeType="String"/>
+        <attribute name="quantity" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="receiptPhotoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="parts" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="Registration" representedClassName="Registration" syncable="YES" codeGenerationType="class">
+        <attribute name="documentData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="expirationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="plateNumber" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="registration" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="ScheduledTask" representedClassName="ScheduledTask" syncable="YES" codeGenerationType="class">
+        <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dueMileage" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="estimatedCost" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="scheduledTasks" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="ServiceRecord" representedClassName="ServiceRecord" syncable="YES" codeGenerationType="class">
+        <attribute name="cost" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="mileage" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="receiptPhotoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="shop" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="serviceRecords" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="licensePlate" optional="YES" attributeType="String"/>
+        <attribute name="make" optional="YES" attributeType="String"/>
+        <attribute name="model" optional="YES" attributeType="String"/>
+        <attribute name="odometer" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ownerName" optional="YES" attributeType="String"/>
+        <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="trim" optional="YES" attributeType="String"/>
+        <attribute name="vin" optional="YES" attributeType="String"/>
+        <attribute name="year" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="documents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Document" inverseName="vehicle" inverseEntity="Document"/>
+        <relationship name="insurance" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Insurance" inverseName="vehicle" inverseEntity="Insurance"/>
+        <relationship name="parts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Part" inverseName="vehicle" inverseEntity="Part"/>
+        <relationship name="registration" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Registration" inverseName="vehicle" inverseEntity="Registration"/>
+        <relationship name="scheduledTasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ScheduledTask" inverseName="vehicle" inverseEntity="ScheduledTask"/>
+        <relationship name="serviceRecords" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ServiceRecord" inverseName="vehicle" inverseEntity="ServiceRecord"/>
+    </entity>
+</model>

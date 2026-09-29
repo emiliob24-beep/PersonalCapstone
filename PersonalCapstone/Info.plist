@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+		<string>processing</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.apple.coredata.cloudkit.activity.setup</string>
+		<string>com.apple.coredata.cloudkit.activity.import</string>
+		<string>com.apple.coredata.cloudkit.activity.export</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to scan service receipts and auto-fill service record details.</string>
+</dict>
+</plist>
