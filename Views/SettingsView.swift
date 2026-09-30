@@ -79,6 +79,7 @@ struct SettingsView: View {
                         documentsSection(vehicle)
                         languageSection
                         notificationsSection
+                        aboutSection
                         if !vehicle.isSharedWithMe {
                             dangerZoneSection(vehicle)
                         }
@@ -414,6 +415,19 @@ struct SettingsView: View {
 //            Button("Send Test Notification (fires in 10s)") {
 //                NotificationManager.shared.sendTestNotification()
 //            }
+        }
+    }
+
+    // MARK: - About
+
+    private var aboutSection: some View {
+        Section {
+            Link(destination: URL(string: "https://emiliob24-beep.github.io/PersonalCapstone/privacy.html")!) {
+                Label("Privacy Policy", systemImage: "hand.raised")
+            }
+            Link(destination: URL(string: "https://emiliob24-beep.github.io/PersonalCapstone/support.html")!) {
+                Label("Support", systemImage: "questionmark.circle")
+            }
         }
     }
 
