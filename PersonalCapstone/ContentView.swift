@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var appState = AppState()
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     var body: some View {
         TabView(selection: $appState.selectedTab) {
@@ -36,6 +37,12 @@ struct ContentView: View {
         .environmentObject(appState)
         .task {
             NotificationManager.shared.requestAuthorization()
+        }
+        .fullScreenCover(isPresented: Binding(
+            get: { !hasSeenOnboarding },
+            set: { hasSeenOnboarding = !$0 }
+        )) {
+            OnboardingView()
         }
     }
 }

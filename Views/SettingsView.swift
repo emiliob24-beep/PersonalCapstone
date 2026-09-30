@@ -134,20 +134,6 @@ struct SettingsView: View {
                     )
                 }
             }
-            .confirmationDialog(
-                selectedVehicle.map { "Delete \(String($0.year)) \($0.make ?? "") \($0.model ?? "")?" } ?? "Delete Vehicle?",
-                isPresented: $showingDeleteConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button("Delete Vehicle", role: .destructive) {
-                    if let vehicle = selectedVehicle {
-                        deleteVehicle(vehicle)
-                    }
-                }
-                Button("Cancel", role: .cancel) {}
-            } message: {
-                Text("This permanently deletes this vehicle and all its service records, scheduled tasks, insurance, registration, and documents. This can't be undone.")
-            }
         }
     }
 
@@ -440,6 +426,18 @@ struct SettingsView: View {
             } label: {
                 Text("Delete Vehicle")
                     .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .confirmationDialog(
+                "Delete \(String(vehicle.year)) \(vehicle.make ?? "") \(vehicle.model ?? "")?",
+                isPresented: $showingDeleteConfirmation,
+                titleVisibility: .visible
+            ) {
+                Button("Delete Vehicle", role: .destructive) {
+                    deleteVehicle(vehicle)
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("This permanently deletes this vehicle and all its service records, scheduled tasks, insurance, registration, and documents. This can't be undone.")
             }
         } footer: {
             Text("Permanently removes this vehicle and everything attached to it.")
