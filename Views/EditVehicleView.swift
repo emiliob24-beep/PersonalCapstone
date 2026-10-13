@@ -26,8 +26,11 @@ struct EditVehicleView: View {
     @State private var licensePlate: String
     @State private var odometer: String
 
-    @State private var isDecoding = false
-    @State private var decodeErrorMessage: String?
+    // VIN lookup is temporarily disabled for App Review (Guideline 5.1.1(ix)).
+    // To re-enable: uncomment the blocks marked "VIN lookup" in this file and
+    // in VINDecodeResult.swift, and move the VIN field back into its own section.
+    // @State private var isDecoding = false
+    // @State private var decodeErrorMessage: String?
 
     @State private var photosPickerItem: PhotosPickerItem?
     @State private var pickedPhotoData: Data?
@@ -51,9 +54,11 @@ struct EditVehicleView: View {
         && Int16(year) != nil
     }
 
+    /* VIN lookup
     private var canLookUpVIN: Bool {
         vin.trimmingCharacters(in: .whitespaces).count == 17 && !isDecoding
     }
+    */
 
     var body: some View {
         NavigationStack {
@@ -83,6 +88,7 @@ struct EditVehicleView: View {
                     }
                 }
 
+                /* VIN lookup
                 Section("VIN Lookup") {
                     TextField("Enter 17-character VIN", text: $vin)
                         .textInputAutocapitalization(.characters)
@@ -108,6 +114,7 @@ struct EditVehicleView: View {
                             .foregroundStyle(.red)
                     }
                 }
+                */
 
                 Section("Vehicle") {
                     TextField("Year", text: $year)
@@ -119,6 +126,9 @@ struct EditVehicleView: View {
                 }
 
                 Section("Details") {
+                    TextField("VIN (optional)", text: $vin)
+                        .textInputAutocapitalization(.characters)
+                        .autocorrectionDisabled()
                     TextField("License Plate (optional)", text: $licensePlate)
                         .textInputAutocapitalization(.characters)
                     TextField("Current Odometer (mi)", text: $odometer)
@@ -147,6 +157,7 @@ struct EditVehicleView: View {
         }
     }
 
+    /* VIN lookup
     private func lookUpVIN() {
         decodeErrorMessage = nil
         isDecoding = true
@@ -171,6 +182,7 @@ struct EditVehicleView: View {
             }
         }
     }
+    */
 
     private func save() {
         vehicle.year = Int16(year) ?? 0

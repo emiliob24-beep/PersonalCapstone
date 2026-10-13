@@ -29,6 +29,12 @@ private struct VINDecodeResponse: Decodable {
     let Results: [VINDecodeResult]
 }
 
+// VIN lookup is temporarily disabled for App Review (Guideline 5.1.1(ix)).
+// Everything below (VINDecoderError + VINDecoderService, including the NHTSA
+// URL) is commented out so the app makes no network requests of its own.
+// To re-enable, remove the block comment and uncomment the "VIN lookup"
+// blocks in AddVehicleView.swift and EditVehicleView.swift.
+/* VIN lookup
 enum VINDecoderError: LocalizedError {
     case invalidVIN
     case networkError
@@ -82,3 +88,4 @@ enum VINDecoderService {
         return result
     }
 }
+*/
